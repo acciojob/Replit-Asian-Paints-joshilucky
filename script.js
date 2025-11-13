@@ -1,24 +1,30 @@
-const changeBtn = document.getElementById("change_button");
-const resetBtn = document.getElementById("Reset");
+const changeButton = document.getElementById("change_button");
+const resetButton = document.getElementById("reset_button");
 
-changeBtn.addEventListener("click", () => {
-  const blockId = document.getElementById("block_id").value;
-  const color = document.getElementById("colour_id").value;
+const blockInput = document.getElementById("block_id");
+const colorInput = document.getElementById("colour_id");
 
-  // Reset all items before applying new color
-  resetGrid();
+const boxes = document.querySelectorAll(".grid-item");
 
-  // Apply new color
-  const block = document.getElementById(blockId);
-  if (block) {
-    block.style.backgroundColor = color;
+// Reset all blocks
+function resetAll() {
+  boxes.forEach(box => {
+    box.style.backgroundColor = "transparent";
+  });
+}
+
+changeButton.addEventListener("click", () => {
+  const blockId = blockInput.value;
+  const color = colorInput.value;
+
+  resetAll(); // reset before applying new color
+
+  const targetBox = document.getElementById(blockId);
+  if (targetBox) {
+    targetBox.style.backgroundColor = color;
   }
 });
 
-resetBtn.addEventListener("click", resetGrid);
-
-function resetGrid() {
-  for (let i = 1; i <= 9; i++) {
-    document.getElementById(i).style.backgroundColor = "transparent";
-  }
-}
+resetButton.addEventListener("click", () => {
+  resetAll();
+});
